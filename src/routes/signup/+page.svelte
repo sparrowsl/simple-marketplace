@@ -33,8 +33,19 @@
 				<input
 					type="text"
 					class="grow input border-0"
-					placeholder="Username"
-					name="username"
+					placeholder="Name"
+					name="name"
+					required
+				/>
+			</label>
+
+			<label class="input input-bordered flex items-center gap-2">
+				<Icon icon="mdi:email" />
+				<input
+					type="email"
+					class="grow input border-0"
+					placeholder="Email"
+					name="email"
 					required
 				/>
 			</label>

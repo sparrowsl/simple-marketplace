@@ -28,12 +28,12 @@
 
 		<fieldset class="grid gap-4">
 			<label class="input input-bordered flex items-center gap-2">
-				<Icon icon="mdi:person" />
+				<Icon icon="mdi:email" />
 				<input
-					type="text"
+					type="email"
 					class="grow input border-0"
-					placeholder="Username"
-					name="username"
+					placeholder="Email"
+					name="email"
 					required
 				/>
 			</label>

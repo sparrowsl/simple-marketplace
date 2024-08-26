@@ -1,21 +1,17 @@
-import db from "$lib/prisma.ts";
 import { fail, redirect, type Actions } from "@sveltejs/kit";
-import * as v from "valibot";
+import { z } from "zod";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET_KEY } from "$env/static/private";
 import type { User } from "$lib/types";
+import db from "$lib/prisma";
 
-const signupSchema = v.object({
-	username: v.pipe(
-		v.string(),
-		v.trim(),
-		v.minLength(2, "username must be 2 or more characters"),
-	),
-	password: v.pipe(
-		v.string(),
-		v.minLength(4, "password must be 4 or more characters"),
-	),
+const signupSchema = z.object({
+	name: z.string().trim().min(2, { message: "name is too short" }),
+	email: z.string().email(),
+	password: z
+		.string()
+		.min(4, { message: "password must be 4 or more characters" }),
 });
 
 export const actions: Actions = {
@@ -25,22 +21,19 @@ export const actions: Actions = {
 		) as unknown as User;
 
 		// validate the input data
-		const { output, issues, success } = v.safeParse(signupSchema, form, {
-			abortEarly: true,
-		});
-
+		const { data, error, success } = signupSchema.safeParse(form);
 		if (!success) {
-			const errors = issues.map((issue) => issue.message);
-			return fail(400, { message: errors[0] });
+			const errors = error.flatten().fieldErrors;
+			return fail(400, { message: Object.values(errors)[0] });
 		}
 
 		try {
 			// check if the user exists in the database
-			const usernameExists = await db.user.findUnique({
-				where: { username: output.username },
+			const emailExists = await db.user.findUnique({
+				where: { email: data.email },
 			});
-			if (usernameExists) {
-				return fail(400, { message: "username already taken!!" });
+			if (emailExists) {
+				return fail(400, { message: "email already taken!!" });
 			}
 			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		} catch (error: any) {
@@ -49,16 +42,17 @@ export const actions: Actions = {
 		}
 
 		try {
-			const hashedPassword = await bcrypt.hash(output.password, 12);
+			const hashedPassword = await bcrypt.hash(data.password, 12);
 
 			const user = await db.user.create({
 				data: {
-					username: output.username,
+					name: data.name,
+					email: data.email,
 					password: hashedPassword,
 				},
-				omit: {
-					password: true,
-				},
+				// omit: {
+				// 	password: true,
+				// },
 			});
 
 			// JWT the user info
@@ -71,6 +65,6 @@ export const actions: Actions = {
 			return fail(400, { message: error.message });
 		}
 
-		redirect(307, "/photos");
+		redirect(307, "/");
 	},
 };
