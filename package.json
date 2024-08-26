@@ -1,0 +1,41 @@
+{
+	"name": "simple-marketplace",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"setup": "prisma db push"
+	},
+	"devDependencies": {
+		"@iconify/svelte": "^4.0.2",
+		"@sveltejs/adapter-node": "^5.2.2",
+		"@sveltejs/kit": "^2.5.24",
+		"@sveltejs/vite-plugin-svelte": "^3.1.2",
+		"@tailwindcss/forms": "^0.5.7",
+		"@tailwindcss/typography": "^0.5.14",
+		"@types/bcrypt": "^5.0.2",
+		"@types/jsonwebtoken": "^9.0.6",
+		"autoprefixer": "^10.4.20",
+		"daisyui": "^4.12.10",
+		"prisma": "^5.18.0",
+		"svelte": "^4.2.19",
+		"svelte-check": "^3.8.6",
+		"tailwindcss": "^3.4.10",
+		"tslib": "^2.7.0",
+		"typescript": "^5.5.4",
+		"vite": "^5.4.2"
+	},
+	"type": "module",
+	"dependencies": {
+		"@prisma/client": "^5.18.0",
+		"bcrypt": "^5.1.1",
+		"jsonwebtoken": "^9.0.2",
+		"sharp": "^0.33.5",
+		"svelte-sonner": "^0.3.27",
+		"zod": "^3.23.8"
+	}
+}
