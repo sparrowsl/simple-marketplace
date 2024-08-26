@@ -16,6 +16,7 @@
 			</div>
 		{/if}
 		<div class="navbar-end gap-5">
+			<a href="/">Home</a>
 			{#if $page.data.user}
 				<a href="/products/new" class="btn btn-sm btn-success">Add Product</a>
 

@@ -3,16 +3,17 @@ export type User = {
 	name: string;
 	email: string;
 	password: string;
-	// photos?: Photo[];
+	products?: Product[];
 };
 
-// export type Photo = {
-// 	id?: string;
-// 	caption: string;
-// 	blob: string | File;
-// 	url: string;
-// 	university: string;
-// 	classYear: string;
-// 	user?: User;
-// 	userId: string;
-// };
+export type Product = {
+	id?: string;
+	title: string;
+	price: number;
+	description: string;
+	image: string | File;
+	rating: number;
+	createdAt: Date;
+	user?: User;
+	userId: string;
+};
