@@ -1,9 +1,13 @@
-<section class="min-h-[50vh] grid place-content-center">
-	<h1 class="text-3xl text-center mb-2 font-bold">Simple Photo Gallery</h1>
-	<p class="max-w-xl text-center text-gray-500 italic">
-		A platform for students from different classes and campuses can upload and
-		view photos. This platform includes features for university and class
-		selection, photo upload, and a gallery view.
-	</p>
-	<a href="/photos" class="mt-5 mx-auto w-fit btn btn-accent">View Photos</a>
+<section class="min-h-[80vh] grid gap-7 grid-cols-4 py-10">
+	{#each { length: 15 } as _}
+		<figure class="shadow-xl p-5">
+			<img src="" alt="" />
+			<figcaption>
+				<h3>Lorem ipsum dolor sit amet.</h3>
+				<p>
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius, totam.
+				</p>
+			</figcaption>
+		</figure>
+	{/each}
 </section>
