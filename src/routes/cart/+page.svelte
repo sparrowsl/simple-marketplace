@@ -1,15 +1,29 @@
 <script lang="ts">
-	import { invalidateAll } from "$app/navigation";
+	import { goto } from "$app/navigation";
 	import { cart } from "$lib/cart";
 
 	function removeFromCart(id: string) {
 		const filteredCart = $cart.filter((item) => item.id !== id);
 		$cart = filteredCart;
-		// invalidateAll();
 	}
 </script>
 
 <section class="min-h-96 p-10">
+	<div class="p-5 flex items-center justify-evenly">
+		<p>
+			Total Amount: {$cart.reduce((prev, curr) => prev + curr.price, 0)}
+		</p>
+
+		<button
+			type="button"
+			disabled={$cart.length <= 0}
+			class="btn btn-sm btn-success"
+			on:click={() => goto("/checkout")}
+		>
+			checkout
+		</button>
+	</div>
+
 	<h2 class="text-center font-semibold">Cart Items</h2>
 
 	<div class="grid grid-cols-3">
