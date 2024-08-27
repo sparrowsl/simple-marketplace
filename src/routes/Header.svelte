@@ -19,12 +19,12 @@
 				<div class="flex-none">
 					<div class="dropdown dropdown-end">
 						<div class="btn btn-ghost btn-circle">
-							<div class="indicator">
+							<a class="indicator" href="/cart">
 								<Icon icon="mdi:cart" class="text-lg" />
 								<span class="badge badge-sm indicator-item">
 									{$cart?.length || 0}
 								</span>
-							</div>
+							</a>
 						</div>
 					</div>
 					<div class="dropdown dropdown-end">
