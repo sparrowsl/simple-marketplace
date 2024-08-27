@@ -15,6 +15,6 @@ export const load: PageServerLoad = async ({ locals }) => {
 export const actions: Actions = {
 	logout: ({ cookies }) => {
 		cookies.delete("user", { path: "/" });
-		redirect(307, "/photos");
+		redirect(307, "/");
 	},
 };
