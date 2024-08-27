@@ -14,6 +14,8 @@
 		}
 		return false;
 	}
+
+	$: product = data.product;
 </script>
 
 <article class="rounded bg-white/30 max-w-3xl p-2 py-10">
@@ -24,17 +26,17 @@
 	<section class="">
 		<figure class="card card-side bg-base-100 shadow">
 			<img
-				src="data:image/webp;base64,{data.product.image}"
-				alt={data.product.title}
+				src="data:image/webp;base64,{product.image}"
+				alt={product.title}
 				loading="lazy"
 				class="min-w-[20rem] h-[20rem] object-cover bg-center"
 			/>
 			<figcaption class="card-body">
 				<h4 class="card-title">
-					{data.product?.title}
+					{product?.title}
 				</h4>
 				<span class="flex items-center mt-2">
-					{#each { length: data.product.rating || 5 } as _}
+					{#each { length: product.rating || 5 } as _}
 						<Icon class="text-yellow-400 text-lg" icon="mdi:star" />
 					{/each}
 				</span>
@@ -42,24 +44,24 @@
 				<p class="flex-grow-0">
 					<span class="font-semibold">Price: </span>
 					<span class="text-xs">SLE </span>
-					{data.product?.price}
+					{product?.price}
 				</p>
 
 				<p class="flex-grow-0 text-gray-600 whitespace-pre-wrap">
-					{data.product?.description}
+					{product?.description}
 				</p>
 
 				{#if data.user}
 					<div class="card-actions justify-end mt-auto">
 						<button
 							class="btn btn-primary"
-							disabled={inCart(data.product.id)}
+							disabled={inCart(product.id) || product?.userId === data.user?.id}
 							on:click={() => {
-								$cart = [...$cart, data.product];
+								$cart = [...$cart, product];
 								invalidateAll();
 							}}
 						>
-							{inCart(data.product.id) ? "Already in cart" : "Add to cart"}
+							{inCart(product.id) ? "Already in cart" : "Add to cart"}
 						</button>
 					</div>
 				{/if}
