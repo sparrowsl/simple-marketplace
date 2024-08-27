@@ -44,7 +44,7 @@ export const actions: Actions = {
 		try {
 			const base64urlImage = (
 				await sharp(await data.image.arrayBuffer())
-					// .resize({ width: 300, height: 250 })
+					.resize({ width: 350, height: 320 })
 					.webp()
 					.toBuffer()
 			).toString("base64");
